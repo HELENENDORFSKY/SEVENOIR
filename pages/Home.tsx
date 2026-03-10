@@ -1,114 +1,236 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { NavLink } from 'react-router-dom';
-import { ArrowRight, Layers, Globe, Shield } from 'lucide-react';
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.1, duration: 0.5, ease: 'easeOut' },
-  }),
-};
-
-const pillars = [
-  {
-    icon: <Layers size={28} />,
-    title: 'Precision Infrastructure',
-    desc: 'End-to-end identity tagging for airlines, airports, and global logistics operators.',
-  },
-  {
-    icon: <Globe size={28} />,
-    title: 'Global Reach',
-    desc: 'Seamlessly connecting physical assets across continents with tamper-proof digital identities.',
-  },
-  {
-    icon: <Shield size={28} />,
-    title: 'Trusted Provenance',
-    desc: 'Every item, every shipment — verified from origin to destination.',
-  },
-];
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { ArrowRight, BarChart3, ShieldCheck, Users } from 'lucide-react';
+import { PlaceholderFrame } from '../components/ui/PlaceholderFrame';
+import { UseCases } from '../components/UseCases';
+import { MEDIA } from '../content/media';
 
 export default function Home() {
+  const [viewMode, setViewMode] = useState<'enterprise' | 'consumer'>('enterprise');
+
   return (
-    <section className="min-h-screen flex flex-col justify-center">
-      {/* Hero */}
-      <div className="max-w-7xl mx-auto px-6 pt-32 pb-20 text-center">
-        <motion.p
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={0}
-          className="text-xs font-semibold tracking-[0.3em] uppercase text-white/40 mb-4"
+    <div className="flex flex-col">
+      
+      {/* HERO SECTION */}
+      <section className="relative pt-12 pb-32 max-w-7xl mx-auto px-6 w-full">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="max-w-5xl"
         >
-          Precision Infrastructure
-        </motion.p>
-
-        <motion.h1
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={1}
-          className="text-5xl md:text-7xl font-bold leading-tight text-metallic mb-6"
-        >
-          Identity Layer
-          <br />
-          for the Physical World
-        </motion.h1>
-
-        <motion.p
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={2}
-          className="max-w-2xl mx-auto text-lg text-white/60 leading-relaxed mb-10"
-        >
-          Sevenoir builds the trust infrastructure that connects physical assets — across
-          airlines, airports, and global logistics — to a verifiable digital identity.
-        </motion.p>
-
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={3}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
-          <NavLink
-            to="/products"
-            className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-white text-[#686a6c] font-semibold text-sm hover:bg-white/90 transition-colors"
-          >
-            Explore Products <ArrowRight size={16} />
-          </NavLink>
-          <NavLink
-            to="/vision"
-            className="inline-flex items-center gap-2 px-7 py-3 rounded-full border border-white/20 text-white text-sm hover:border-white/50 transition-colors"
-          >
-            Our Vision
-          </NavLink>
-        </motion.div>
-      </div>
-
-      {/* Pillars */}
-      <div className="max-w-7xl mx-auto px-6 pb-24">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {pillars.map((p, i) => (
-            <motion.div
-              key={p.title}
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              custom={4 + i}
-              className="silver-border rounded-2xl p-8 bg-white/5 hover:bg-white/8 transition-colors"
+          {/* Toggle Switch */}
+          <div className="inline-flex bg-white/5 p-1 rounded-full border border-white/10 mb-10">
+            <button 
+              onClick={() => setViewMode('enterprise')}
+              className={`px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all flex items-center gap-2 ${viewMode === 'enterprise' ? 'bg-white text-black shadow-lg' : 'text-gray-200 hover:text-white'}`}
             >
-              <div className="text-white/70 mb-4">{p.icon}</div>
-              <h3 className="text-white font-semibold text-lg mb-2">{p.title}</h3>
-              <p className="text-white/50 text-sm leading-relaxed">{p.desc}</p>
+              <BarChart3 size={14} /> Enterprise
+            </button>
+            <button 
+              onClick={() => setViewMode('consumer')}
+              className={`px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all flex items-center gap-2 ${viewMode === 'consumer' ? 'bg-white text-black shadow-lg' : 'text-gray-200 hover:text-white'}`}
+            >
+              <Users size={14} /> Passenger
+            </button>
+          </div>
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={viewMode}
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 10 }}
+              transition={{ duration: 0.4 }}
+            >
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-white mb-8 leading-[1.05]">
+                {viewMode === 'enterprise' ? (
+                  <>The Global Recovery Layer for <span className="text-gray-100 italic">Aviation.</span></>
+                ) : (
+                  <>Total peace of mind for <span className="text-gray-100 italic">every journey.</span></>
+                )}
+              </h1>
+
+              <p className="text-xl md:text-2xl text-white mb-12 max-w-3xl leading-relaxed font-light">
+                {viewMode === 'enterprise' ? (
+                  "Closing the $5B gap in mishandled logistics. Hybrid UHF/NFC identity tags integrated directly with SITA WorldTracer and IATA 753 standards."
+                ) : (
+                  "Your items, verified globally. Automated recovery that works with airlines to find and return your luggage before you even realize it's missing."
+                )}
+              </p>
             </motion.div>
-          ))}
+          </AnimatePresence>
+          
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto">
+            <Link to="/products" className="w-full sm:w-auto">
+                <button className="w-full sm:w-auto px-5 py-3.5 md:px-8 md:py-4 bg-white text-black text-sm md:text-lg font-semibold tracking-wide hover:bg-gray-200 transition-colors flex items-center justify-center min-w-[160px] md:min-w-[200px] rounded-xl md:rounded-2xl shadow-[0_0_20px_rgba(255,255,255,0.1)] whitespace-normal text-center">
+                    Technical Specs
+                    <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5 shrink-0" />
+                </button>
+            </Link>
+            <Link to="/contact" className="w-full sm:w-auto">
+                <button className="w-full sm:w-auto px-5 py-3.5 md:px-8 md:py-4 bg-transparent border border-white/20 text-white text-sm md:text-lg font-medium tracking-wide hover:bg-white/5 hover:border-white/40 transition-all min-w-[160px] md:min-w-[200px] rounded-xl md:rounded-2xl whitespace-normal text-center">
+                    Contact Sales
+                </button>
+            </Link>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* THE CRISIS SECTION */}
+      <section className="py-24 border-t border-white/10 bg-white/[0.02]">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+             <h2 className="text-3xl md:text-5xl font-bold text-white mb-8 leading-tight">
+               The $5 Billion Blindness Gap.
+             </h2>
+             
+             <p className="text-lg text-white mb-8 leading-relaxed">
+               In 2024, the aviation industry mishandled 33.4 million bags. Industrial UHF RFID tracks items for internal systems, but passengers remain blind to their property's custody. Sevenoir bridges this gap with hybrid hardware and API-first recovery logic.
+             </p>
+
+             <div className="space-y-6">
+                {[
+                  "33.4M bags mishandled annually (SITA Data)",
+                  "$150+ Average cost per mishandled bag for airlines",
+                  "IATA 753 Compliance gaps in regional networks",
+                  "Insurance fraud via unverified loss claims",
+                  "No cross-industry identity interoperability"
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start">
+                    <div className="h-px w-6 bg-red-500/50 mt-3 mr-4"></div>
+                    <span className="text-white font-light text-lg">{item}</span>
+                  </div>
+                ))}
+             </div>
+          </motion.div>
+
+          <motion.div
+             initial={{ opacity: 0, scale: 0.95 }}
+             whileInView={{ opacity: 1, scale: 1 }}
+             viewport={{ once: true }}
+          >
+             <PlaceholderFrame 
+                label="TECHNICAL OVERVIEW — IATA 753 Integration" 
+                aspect="square" 
+                src={MEDIA.home.heroProblemVisual} 
+                fit="cover"
+             />
+          </motion.div>
+
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* THREE PART SOLUTION */}
+      <section className="py-24 border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-6">
+           <div className="mb-16">
+             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Infrastructure-as-a-Service</h2>
+             <p className="text-white">Precision hardware meeting automated logic.</p>
+           </div>
+
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Card 1: Hybrid Tag */}
+              <div className="flex flex-col h-full bg-[#575b5f] border border-white/10 rounded-2xl group hover:border-white/20 transition-colors overflow-hidden">
+                 <div className="p-8 pb-0">
+                    <h3 className="text-xl font-bold text-white mb-2">1. Hybrid Identity Tag</h3>
+                    <p className="text-sm text-gray-200 uppercase tracking-widest mb-6">Hardware (EM4425)</p>
+                    <ul className="space-y-2 mb-8 text-white text-sm">
+                       <li>• Dual UHF RFID (IATA 753) + NFC</li>
+                       <li>• Industrial-grade durability</li>
+                       <li>• Shared-memory chip architecture</li>
+                       <li>• Battery-free permanent identity</li>
+                    </ul>
+                 </div>
+                 <div className="mt-auto px-4 pb-0">
+                    <PlaceholderFrame 
+                      noFrame 
+                      label="HARDWARE — Dual-Band Tag" 
+                      aspect="portrait" 
+                      src={MEDIA.products.smartIdentityTag} 
+                      fit="contain" 
+                    />
+                 </div>
+              </div>
+
+              {/* Card 2: Verification Engine */}
+              <div className="flex flex-col h-full bg-[#575b5f] border border-white/10 rounded-2xl group hover:border-white/20 transition-colors overflow-hidden">
+                 <div className="p-8 pb-4">
+                    <h3 className="text-xl font-bold text-white mb-2">2. Verification Engine</h3>
+                    <p className="text-sm text-gray-200 uppercase tracking-widest mb-6">API & Software</p>
+                    <ul className="space-y-2 mb-6 text-white text-sm">
+                       <li>• SITA WorldTracer Integration</li>
+                       <li>• Automated Bag Journey mapping</li>
+                       <li>• Cryptographic custody proofs</li>
+                       <li>• Anomaly detection & triage</li>
+                    </ul>
+                 </div>
+                 <div className="mt-4 px-4 pb-4">
+                    <PlaceholderFrame 
+                      noFrame 
+                      label="SOFTWARE — Operator Dashboard" 
+                      aspect="video" 
+                      src={MEDIA.products.verificationEngine} 
+                      fit="cover" 
+                    />
+                 </div>
+              </div>
+
+              {/* Card 3: Automated Recovery */}
+              <div className="flex flex-col h-full bg-[#575b5f] border border-white/10 rounded-2xl group hover:border-white/20 transition-colors overflow-hidden">
+                 <div className="p-8 pb-4">
+                    <h3 className="text-xl font-bold text-white mb-2">3. Recovery Operations</h3>
+                    <p className="text-sm text-gray-200 uppercase tracking-widest mb-6">Automation</p>
+                    <ul className="space-y-2 mb-6 text-white text-sm">
+                       <li>• Automated insurance claim logic</li>
+                       <li>• Instant passenger notifications</li>
+                       <li>• Global carrier handoff protocol</li>
+                       <li>• ROI-driven operational scaling</li>
+                    </ul>
+                 </div>
+                 <div className="mt-4 px-4 pb-4">
+                    <PlaceholderFrame 
+                      noFrame 
+                      label="WORKFLOW — Recovery Automation" 
+                      aspect="video" 
+                      src={MEDIA.products.automatedRecoveryWorkflow} 
+                      fit="cover" 
+                    />
+                 </div>
+              </div>
+           </div>
+        </div>
+      </section>
+
+      {/* HOW IT WORKS */}
+      <section className="py-24 border-t border-white/10 bg-white/[0.02]">
+        <div className="max-w-7xl mx-auto px-6">
+           <h2 className="text-3xl font-bold text-white mb-12 text-center uppercase tracking-widest">Operational Logic</h2>
+           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                { step: "01", label: "IATA Registration" },
+                { step: "02", label: "Checkpoint Handoff" },
+                { step: "03", label: "SITA Synchronization" },
+                { step: "04", label: "Verified Recovery" }
+              ].map((item, idx) => (
+                <div key={idx} className="bg-[#575b5f] border border-white/10 p-8 flex flex-col items-center text-center rounded-xl hover:border-white/30 transition-colors">
+                   <span className="text-5xl font-mono text-white/10 mb-4">{item.step}</span>
+                   <span className="text-lg font-semibold text-white">{item.label}</span>
+                </div>
+              ))}
+           </div>
+        </div>
+      </section>
+
+      {/* USE CASES */}
+      <UseCases />
+      
+    </div>
   );
 }
