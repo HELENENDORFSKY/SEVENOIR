@@ -10,8 +10,8 @@ export default function Home() {
   const [viewMode, setViewMode] = useState<'enterprise' | 'consumer'>('enterprise');
 
   return (
-    // Заменила bg-[#050505] на нейтральный индустриальный темный slate
-    <div className="flex flex-col bg-[#0f1115]">
+    // Вернул базовый темно-серый фон (Slate), который не является чисто черным
+    <div className="flex flex-col bg-[#0f1115] min-h-screen">
       
       {/* HERO SECTION */}
       <section className="relative pt-12 pb-32 max-w-7xl mx-auto px-6 w-full">
@@ -53,7 +53,7 @@ export default function Home() {
                 )}
               </h1>
 
-              <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl leading-relaxed font-light">
+              <p className="text-xl md:text-2xl text-gray-200 mb-12 max-w-3xl leading-relaxed font-light">
                 {viewMode === 'enterprise' ? (
                   "Closing the $5.9B information gap between airlines and passengers. A decentralized infrastructure powered by hybrid UHF/NFC technology and IATA 753 compliance."
                 ) : (
@@ -65,7 +65,7 @@ export default function Home() {
           
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto">
             <Link to="/products" className="w-full sm:w-auto">
-                <button className="w-full sm:w-auto px-5 py-3.5 md:px-8 md:py-4 bg-white text-black text-sm md:text-lg font-semibold tracking-wide hover:bg-gray-200 transition-colors flex items-center justify-center min-w-[160px] md:min-w-[200px] rounded-xl md:rounded-2xl shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                <button className="w-full sm:w-auto px-5 py-3.5 md:px-8 md:py-4 bg-white text-black text-sm md:text-lg font-semibold tracking-wide hover:bg-gray-200 transition-colors flex items-center justify-center min-w-[160px] md:min-w-[200px] rounded-xl md:rounded-2xl">
                     Technical Specifications
                     <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5 shrink-0" />
                 </button>
@@ -80,7 +80,7 @@ export default function Home() {
       </section>
 
       {/* THE CRISIS SECTION */}
-      <section className="py-24 border-t border-white/10 bg-white/[0.03]">
+      <section className="py-24 border-t border-white/10 bg-white/[0.02]">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           
           <motion.div 
@@ -93,7 +93,7 @@ export default function Home() {
              </h2>
              
              <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-               In 2024, the aviation industry mishandled 33.4 million bags. Sevenoir bridges the information gap between carrier tracking and passenger visibility through hybrid hardware and API-first audit trails.
+               In 2024, the aviation industry mishandled 33.4 million bags. Sevenoir bridges the gap between industrial internal tracking and passenger visibility.
              </p>
 
              <div className="space-y-5">
@@ -104,10 +104,9 @@ export default function Home() {
                   "Lack of cross-industry identity interoperability"
                 ].map((item, i) => (
                   <div key={i} className="flex items-center group">
-                    <div className="flex items-center justify-center mr-4">
-                      <AlertCircle className="text-red-500 transition-transform group-hover:scale-110" size={20} />
-                    </div>
-                    <span className="text-gray-200 font-light text-lg">{item}</span>
+                    {/* Исправлены красные линии — теперь это иконка предупреждения */}
+                    <AlertCircle className="text-red-500/70 mr-4 shrink-0" size={20} />
+                    <span className="text-white/90 font-light text-lg">{item}</span>
                   </div>
                 ))}
              </div>
@@ -117,7 +116,6 @@ export default function Home() {
              initial={{ opacity: 0, scale: 0.95 }}
              whileInView={{ opacity: 1, scale: 1 }}
              viewport={{ once: true }}
-             className="relative"
           >
              <PlaceholderFrame 
                 label="SYSTEM ARCHITECTURE — IATA 753 & SITA Sync" 
@@ -125,7 +123,6 @@ export default function Home() {
                 src={MEDIA.home.heroProblemVisual} 
                 fit="cover"
              />
-             <div className="absolute inset-0 ring-1 ring-white/10 rounded-2xl pointer-events-none"></div>
           </motion.div>
 
         </div>
@@ -136,17 +133,17 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6">
            <div className="mb-16">
              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Infrastructure-as-a-Service</h2>
-             <p className="text-gray-400">High-precision hardware meeting automated recovery logic.</p>
+             <p className="text-gray-400">Precision hardware meeting automated recovery logic.</p>
            </div>
 
            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Card 1: Hybrid Tag */}
-              <div className="flex flex-col h-full bg-white/[0.04] border border-white/10 rounded-2xl group hover:border-white/20 transition-all overflow-hidden">
+              {/* Card 1: Использован твой оригинальный серый #575b5f */}
+              <div className="flex flex-col h-full bg-[#575b5f] border border-white/10 rounded-2xl group hover:border-white/20 transition-all overflow-hidden">
                  <div className="p-8 pb-0">
-                    <Cpu className="text-white/80 mb-4" size={32} />
+                    <Cpu className="text-white mb-4" size={32} />
                     <h3 className="text-xl font-bold text-white mb-2">1. Hybrid Identity Tag</h3>
-                    <p className="text-xs text-gray-500 uppercase tracking-widest mb-6">Hardware (EM4425)</p>
-                    <ul className="space-y-2 mb-8 text-gray-300 text-sm">
+                    <p className="text-xs text-gray-200 uppercase tracking-widest mb-6">Hardware (EM4425)</p>
+                    <ul className="space-y-2 mb-8 text-white text-sm">
                        <li>• Dual UHF RFID (IATA 753) + NFC</li>
                        <li>• Shared-memory chip architecture</li>
                        <li>• Battery-free permanent identity</li>
@@ -165,12 +162,12 @@ export default function Home() {
               </div>
 
               {/* Card 2: Verification Engine */}
-              <div className="flex flex-col h-full bg-white/[0.04] border border-white/10 rounded-2xl group hover:border-white/20 transition-all overflow-hidden">
+              <div className="flex flex-col h-full bg-[#575b5f] border border-white/10 rounded-2xl group hover:border-white/20 transition-all overflow-hidden">
                  <div className="p-8 pb-4">
-                    <Database className="text-white/80 mb-4" size={32} />
+                    <Database className="text-white mb-4" size={32} />
                     <h3 className="text-xl font-bold text-white mb-2">2. Verification Engine</h3>
-                    <p className="text-xs text-gray-500 uppercase tracking-widest mb-6">API & Software</p>
-                    <ul className="space-y-2 mb-6 text-gray-300 text-sm">
+                    <p className="text-xs text-gray-200 uppercase tracking-widest mb-6">API & Software</p>
+                    <ul className="space-y-2 mb-6 text-white text-sm">
                        <li>• SITA WorldTracer API Integration</li>
                        <li>• Automated Bag Journey mapping</li>
                        <li>• Cryptographic custody proofs</li>
@@ -189,12 +186,12 @@ export default function Home() {
               </div>
 
               {/* Card 3: Automated Recovery */}
-              <div className="flex flex-col h-full bg-white/[0.04] border border-white/10 rounded-2xl group hover:border-white/20 transition-all overflow-hidden">
+              <div className="flex flex-col h-full bg-[#575b5f] border border-white/10 rounded-2xl group hover:border-white/20 transition-all overflow-hidden">
                  <div className="p-8 pb-4">
-                    <Globe className="text-white/80 mb-4" size={32} />
+                    <Globe className="text-white mb-4" size={32} />
                     <h3 className="text-xl font-bold text-white mb-2">3. Recovery Operations</h3>
-                    <p className="text-xs text-gray-500 uppercase tracking-widest mb-6">Automation & ROI</p>
-                    <ul className="space-y-2 mb-6 text-gray-300 text-sm">
+                    <p className="text-xs text-gray-200 uppercase tracking-widest mb-6">Automation & ROI</p>
+                    <ul className="space-y-2 mb-6 text-white text-sm">
                        <li>• Automated insurance claim logic</li>
                        <li>• Instant passenger notifications</li>
                        <li>• Global carrier handoff protocol</li>
@@ -215,26 +212,46 @@ export default function Home() {
         </div>
       </section>
 
-      {/* STRATEGIC PARTNERSHIP SECTION (FIXED VISIBILITY) */}
-      <section className="py-24 border-t border-white/10 bg-white/[0.02]">
+      {/* STRATEGIC PARTNERSHIP SECTION (Исправлена видимость текста) */}
+      <section className="py-24 border-t border-white/10 bg-white/[0.01]">
         <div className="max-w-7xl mx-auto px-6 flex flex-col items-center">
             <h2 className="text-xs font-bold text-gray-400 uppercase tracking-[0.3em] mb-12">Technical Foundation</h2>
             <div className="flex flex-wrap justify-center items-center gap-12">
                <div className="text-center group">
-                 <p className="text-white font-bold text-xl group-hover:text-blue-400 transition-colors">SAFAROFF Agency</p>
-                 <p className="text-[10px] text-gray-300 uppercase tracking-widest mt-1">Digital Integration since 2004</p>
+                 <p className="text-white font-bold text-2xl transition-colors group-hover:text-gray-300">SAFAROFF Agency</p>
+                 <p className="text-[10px] text-gray-200 uppercase tracking-widest mt-2">Digital Integration since 2004</p>
                </div>
-               <div className="h-8 w-px bg-white/20 hidden md:block"></div>
+               <div className="h-10 w-px bg-white/20 hidden md:block"></div>
                <div className="text-center group">
-                 <p className="text-white font-bold text-xl group-hover:text-blue-400 transition-colors">Stuart Prestedge</p>
-                 <p className="text-[10px] text-gray-300 uppercase tracking-widest mt-1">Strategic Advisor</p>
+                 <p className="text-white font-bold text-2xl transition-colors group-hover:text-gray-300">Stuart Prestedge</p>
+                 <p className="text-[10px] text-gray-200 uppercase tracking-widest mt-2">Strategic Advisor</p>
                </div>
-               <div className="h-8 w-px bg-white/20 hidden md:block"></div>
+               <div className="h-10 w-px bg-white/20 hidden md:block"></div>
                <div className="text-center group">
-                 <p className="text-white font-bold text-xl group-hover:text-blue-400 transition-colors">Munich Business School</p>
-                 <p className="text-[10px] text-gray-300 uppercase tracking-widest mt-1">Academic Hub</p>
+                 <p className="text-white font-bold text-2xl transition-colors group-hover:text-gray-300">Munich Business School</p>
+                 <p className="text-[10px] text-gray-200 uppercase tracking-widest mt-2">Academic Hub</p>
                </div>
             </div>
+        </div>
+      </section>
+
+      {/* OPERATIONAL LOGIC */}
+      <section className="py-24 border-t border-white/10 bg-white/[0.02]">
+        <div className="max-w-7xl mx-auto px-6">
+           <h2 className="text-3xl font-bold text-white mb-12 text-center uppercase tracking-widest">Operational Logic</h2>
+           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                { step: "01", label: "IATA Registration" },
+                { step: "02", label: "Checkpoint Handoff" },
+                { step: "03", label: "SITA Synchronization" },
+                { step: "04", label: "Verified Recovery" }
+              ].map((item, idx) => (
+                <div key={idx} className="bg-white/5 border border-white/10 p-8 flex flex-col items-center text-center rounded-xl hover:border-white/30 transition-all">
+                   <span className="text-5xl font-mono text-white/10 mb-4">{item.step}</span>
+                   <span className="text-lg font-semibold text-white">{item.label}</span>
+                </div>
+              ))}
+           </div>
         </div>
       </section>
 
