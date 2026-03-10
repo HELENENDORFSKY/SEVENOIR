@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, BarChart3, Users, Globe, Database, Cpu, AlertCircle } from 'lucide-react';
+import { ArrowRight, BarChart3, ShieldCheck, Users, Globe, Database, Cpu } from 'lucide-react';
 import { PlaceholderFrame } from '../components/ui/PlaceholderFrame';
 import { UseCases } from '../components/UseCases';
 import { MEDIA } from '../content/media';
@@ -10,7 +10,7 @@ export default function Home() {
   const [viewMode, setViewMode] = useState<'enterprise' | 'consumer'>('enterprise');
 
   return (
-    <div className="flex flex-col bg-black">
+    <div className="flex flex-col">
       
       {/* HERO SECTION */}
       <section className="relative pt-12 pb-32 max-w-7xl mx-auto px-6 w-full">
@@ -24,13 +24,13 @@ export default function Home() {
           <div className="inline-flex bg-white/5 p-1 rounded-full border border-white/10 mb-10">
             <button 
               onClick={() => setViewMode('enterprise')}
-              className={`px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all flex items-center gap-2 ${viewMode === 'enterprise' ? 'bg-white text-black shadow-lg' : 'text-gray-400 hover:text-white'}`}
+              className={`px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all flex items-center gap-2 ${viewMode === 'enterprise' ? 'bg-white text-black shadow-lg' : 'text-gray-200 hover:text-white'}`}
             >
               <BarChart3 size={14} /> B2B / Enterprise
             </button>
             <button 
               onClick={() => setViewMode('consumer')}
-              className={`px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all flex items-center gap-2 ${viewMode === 'consumer' ? 'bg-white text-black shadow-lg' : 'text-gray-400 hover:text-white'}`}
+              className={`px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all flex items-center gap-2 ${viewMode === 'consumer' ? 'bg-white text-black shadow-lg' : 'text-gray-200 hover:text-white'}`}
             >
               <Users size={14} /> Passenger
             </button>
@@ -52,7 +52,7 @@ export default function Home() {
                 )}
               </h1>
 
-              <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl leading-relaxed font-light">
+              <p className="text-xl md:text-2xl text-white mb-12 max-w-3xl leading-relaxed font-light">
                 {viewMode === 'enterprise' ? (
                   "Closing the $5.9B information gap between airlines and passengers. A decentralized infrastructure powered by hybrid UHF/NFC technology and IATA 753 compliance."
                 ) : (
@@ -88,26 +88,23 @@ export default function Home() {
             viewport={{ once: true }}
           >
              <h2 className="text-3xl md:text-5xl font-bold text-white mb-8 leading-tight">
-               The $5 Billion Information Blindness.
+               The $5 Billion Information Blindness. [cite: 16]
              </h2>
              
              <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-               In 2024, the aviation industry mishandled 33.4 million bags. While internal UHF RFID tracks assets for carriers, passengers remain disconnected from their property's custody. Sevenoir bridges this gap with hybrid hardware and an API-first audit trail.
+               In 2024, the aviation industry mishandled 33.4 million bags. [cite: 17] While internal UHF RFID tracks assets for carriers, passengers remain disconnected from their property's custody. Sevenoir bridges this gap with hybrid hardware and an API-first audit trail. [cite: 18]
              </p>
 
-             <div className="space-y-5">
+             <div className="space-y-6">
                 {[
-                  "33.4M bags mishandled annually (SITA Data)",
-                  "$150+ Average operational cost per incident",
-                  "Critical IATA 753 compliance gaps in networks",
-                  "Lack of cross-industry identity interoperability"
+                  "33.4M bags mishandled annually (SITA Data) [cite: 19]",
+                  "$150+ Average operational cost per incident [cite: 20]",
+                  "Critical IATA 753 compliance gaps in regional networks [cite: 21]",
+                  "Lack of cross-industry identity interoperability [cite: 23]"
                 ].map((item, i) => (
-                  <div key={i} className="flex items-center group">
-                    <div className="relative flex items-center justify-center mr-4">
-                      <div className="absolute h-px w-full bg-red-600/60 transition-all group-hover:bg-red-500"></div>
-                      <AlertCircle className="text-red-600/40 relative z-10 bg-black rounded-full" size={18} />
-                    </div>
-                    <span className="text-white/80 font-light text-lg transition-colors group-hover:text-white">{item}</span>
+                  <div key={i} className="flex items-start">
+                    <div className="h-px w-6 bg-red-500/50 mt-3 mr-4"></div>
+                    <span className="text-white font-light text-lg">{item}</span>
                   </div>
                 ))}
              </div>
@@ -117,7 +114,6 @@ export default function Home() {
              initial={{ opacity: 0, scale: 0.95 }}
              whileInView={{ opacity: 1, scale: 1 }}
              viewport={{ once: true }}
-             className="relative"
           >
              <PlaceholderFrame 
                 label="SYSTEM ARCHITECTURE — IATA 753 & SITA Sync" 
@@ -125,7 +121,6 @@ export default function Home() {
                 src={MEDIA.home.heroProblemVisual} 
                 fit="cover"
              />
-             <div className="absolute inset-0 ring-1 ring-white/10 rounded-2xl pointer-events-none"></div>
           </motion.div>
 
         </div>
@@ -135,8 +130,8 @@ export default function Home() {
       <section className="py-24 border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6">
            <div className="mb-16">
-             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Infrastructure-as-a-Service</h2>
-             <p className="text-gray-400">High-precision hardware meeting automated recovery logic.</p>
+             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Infrastructure-as-a-Service [cite: 33]</h2>
+             <p className="text-gray-400">High-precision hardware meeting automated recovery logic. [cite: 34]</p>
            </div>
 
            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -144,13 +139,13 @@ export default function Home() {
               <div className="flex flex-col h-full bg-white/[0.03] border border-white/10 rounded-2xl group hover:border-white/20 transition-all overflow-hidden">
                  <div className="p-8 pb-0">
                     <Cpu className="text-white mb-4" size={32} />
-                    <h3 className="text-xl font-bold text-white mb-2">1. Hybrid Identity Tag</h3>
-                    <p className="text-xs text-gray-500 uppercase tracking-widest mb-6">Hardware (EM4425)</p>
+                    <h3 className="text-xl font-bold text-white mb-2">1. Hybrid Identity Tag [cite: 41]</h3>
+                    <p className="text-xs text-gray-500 uppercase tracking-widest mb-6">Hardware (EM4425) [cite: 42]</p>
                     <ul className="space-y-2 mb-8 text-gray-300 text-sm">
-                       <li>• Dual UHF RFID (IATA 753) + NFC</li>
-                       <li>• Shared-memory chip architecture</li>
-                       <li>• Battery-free permanent identity</li>
-                       <li>• Industrial-grade durability</li>
+                       <li>• Dual UHF RFID (IATA 753) + NFC [cite: 43]</li>
+                       <li>• Shared-memory chip architecture [cite: 45]</li>
+                       <li>• Battery-free permanent identity [cite: 46]</li>
+                       <li>• Industrial-grade durability [cite: 44]</li>
                     </ul>
                  </div>
                  <div className="mt-auto px-4 pb-0">
@@ -168,13 +163,13 @@ export default function Home() {
               <div className="flex flex-col h-full bg-white/[0.03] border border-white/10 rounded-2xl group hover:border-white/20 transition-all overflow-hidden">
                  <div className="p-8 pb-4">
                     <Database className="text-white mb-4" size={32} />
-                    <h3 className="text-xl font-bold text-white mb-2">2. Verification Engine</h3>
-                    <p className="text-xs text-gray-500 uppercase tracking-widest mb-6">API & Software</p>
+                    <h3 className="text-xl font-bold text-white mb-2">2. Verification Engine [cite: 47]</h3>
+                    <p className="text-xs text-gray-500 uppercase tracking-widest mb-6">API & Software [cite: 48]</p>
                     <ul className="space-y-2 mb-6 text-gray-300 text-sm">
-                       <li>• SITA WorldTracer API Integration</li>
-                       <li>• Automated Bag Journey mapping</li>
-                       <li>• Cryptographic custody proofs</li>
-                       <li>• Anomaly detection & triage</li>
+                       <li>• SITA WorldTracer API Integration [cite: 49]</li>
+                       <li>• Automated Bag Journey mapping [cite: 52]</li>
+                       <li>• Cryptographic custody proofs [cite: 54]</li>
+                       <li>• Anomaly detection & triage [cite: 56]</li>
                     </ul>
                  </div>
                  <div className="mt-4 px-4 pb-4">
@@ -192,13 +187,13 @@ export default function Home() {
               <div className="flex flex-col h-full bg-white/[0.03] border border-white/10 rounded-2xl group hover:border-white/20 transition-all overflow-hidden">
                  <div className="p-8 pb-4">
                     <Globe className="text-white mb-4" size={32} />
-                    <h3 className="text-xl font-bold text-white mb-2">3. Recovery Operations</h3>
-                    <p className="text-xs text-gray-500 uppercase tracking-widest mb-6">Automation & ROI</p>
+                    <h3 className="text-xl font-bold text-white mb-2">3. Recovery Operations [cite: 50]</h3>
+                    <p className="text-xs text-gray-500 uppercase tracking-widest mb-6">Automation & ROI [cite: 57]</p>
                     <ul className="space-y-2 mb-6 text-gray-300 text-sm">
-                       <li>• Automated insurance claim logic</li>
-                       <li>• Instant passenger notifications</li>
-                       <li>• Global carrier handoff protocol</li>
-                       <li>• ROI-driven operational scaling</li>
+                       <li>• Automated insurance claim logic [cite: 51]</li>
+                       <li>• Instant passenger notifications [cite: 53]</li>
+                       <li>• Global carrier handoff protocol [cite: 55]</li>
+                       <li>• ROI-driven operational scaling [cite: 57]</li>
                     </ul>
                  </div>
                  <div className="mt-4 px-4 pb-4">
@@ -215,24 +210,25 @@ export default function Home() {
         </div>
       </section>
 
-      {/* STRATEGIC PARTNERSHIP SECTION (Fixed contrast) */}
+      {/* STRATEGIC PARTNERSHIP SECTION */}
       <section className="py-24 border-t border-white/10 bg-white/[0.01]">
         <div className="max-w-7xl mx-auto px-6 flex flex-col items-center">
-            <h2 className="text-xs font-bold text-gray-400 uppercase tracking-[0.3em] mb-12">Technical Foundation</h2>
-            <div className="flex flex-wrap justify-center items-center gap-12 transition-all">
-               <div className="text-center group">
-                 <p className="text-white font-bold text-xl transition-opacity group-hover:opacity-100">SAFAROFF Agency</p>
-                 <p className="text-[10px] text-gray-400 uppercase tracking-widest mt-1">Digital Integration since 2004</p>
+            <h2 className="text-sm font-bold text-gray-500 uppercase tracking-[0.3em] mb-12">Technical Foundation</h2>
+            <div className="flex flex-wrap justify-center items-center gap-12 opacity-70 grayscale hover:grayscale-0 transition-all">
+               {/* Здесь можно добавить логотипы, но текстом тоже хорошо */}
+               <div className="text-center">
+                 <p className="text-white font-bold text-xl">SAFAROFF Agency</p>
+                 <p className="text-xs text-gray-500">Digital Integration since 2004</p>
                </div>
-               <div className="h-8 w-px bg-white/20 hidden md:block"></div>
-               <div className="text-center group">
+               <div className="h-8 w-px bg-white/10 hidden md:block"></div>
+               <div className="text-center">
                  <p className="text-white font-bold text-xl">Stuart Prestedge</p>
-                 <p className="text-[10px] text-gray-400 uppercase tracking-widest mt-1">Strategic Advisor</p>
+                 <p className="text-xs text-gray-500">Strategic Advisor</p>
                </div>
-               <div className="h-8 w-px bg-white/20 hidden md:block"></div>
-               <div className="text-center group">
+               <div className="h-8 w-px bg-white/10 hidden md:block"></div>
+               <div className="text-center">
                  <p className="text-white font-bold text-xl">Munich Business School</p>
-                 <p className="text-[10px] text-gray-400 uppercase tracking-widest mt-1">Academic Hub</p>
+                 <p className="text-xs text-gray-500">Academic Hub</p>
                </div>
             </div>
         </div>
@@ -241,13 +237,13 @@ export default function Home() {
       {/* OPERATIONAL LOGIC */}
       <section className="py-24 border-t border-white/10 bg-white/[0.02]">
         <div className="max-w-7xl mx-auto px-6">
-           <h2 className="text-3xl font-bold text-white mb-12 text-center uppercase tracking-widest">Operational Logic</h2>
+           <h2 className="text-3xl font-bold text-white mb-12 text-center uppercase tracking-widest">Operational Logic [cite: 75]</h2>
            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {[
-                { step: "01", label: "IATA Registration" },
-                { step: "02", label: "Checkpoint Handoff" },
-                { step: "03", label: "SITA Synchronization" },
-                { step: "04", label: "Verified Recovery" }
+                { step: "01", label: "IATA Registration [cite: 67]" },
+                { step: "02", label: "Checkpoint Handoff [cite: 76]" },
+                { step: "03", label: "SITA Synchronization [cite: 79]" },
+                { step: "04", label: "Verified Recovery [cite: 80]" }
               ].map((item, idx) => (
                 <div key={idx} className="bg-white/5 border border-white/10 p-8 flex flex-col items-center text-center rounded-xl hover:border-white/30 transition-all">
                    <span className="text-5xl font-mono text-white/10 mb-4">{item.step}</span>
