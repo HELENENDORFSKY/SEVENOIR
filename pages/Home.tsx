@@ -10,7 +10,8 @@ export default function Home() {
   const [viewMode, setViewMode] = useState<'enterprise' | 'consumer'>('enterprise');
 
   return (
-    <div className="flex flex-col bg-[#050505]">
+    // Заменила bg-[#050505] на нейтральный индустриальный темный slate
+    <div className="flex flex-col bg-[#0f1115]">
       
       {/* HERO SECTION */}
       <section className="relative pt-12 pb-32 max-w-7xl mx-auto px-6 w-full">
@@ -46,9 +47,9 @@ export default function Home() {
             >
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-white mb-8 leading-[1.05]">
                 {viewMode === 'enterprise' ? (
-                  <>The Global Identity Layer for <span className="text-gray-500 italic">Physical Assets.</span></>
+                  <>The Global Identity Layer for <span className="text-gray-400 italic">Physical Assets.</span></>
                 ) : (
-                  <>Verified security for <span className="text-gray-500 italic">everything you own.</span></>
+                  <>Verified security for <span className="text-gray-400 italic">everything you own.</span></>
                 )}
               </h1>
 
@@ -79,7 +80,7 @@ export default function Home() {
       </section>
 
       {/* THE CRISIS SECTION */}
-      <section className="py-24 border-t border-white/10 bg-white/[0.02]">
+      <section className="py-24 border-t border-white/10 bg-white/[0.03]">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           
           <motion.div 
@@ -92,10 +93,10 @@ export default function Home() {
              </h2>
              
              <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-               In 2024, the aviation industry mishandled 33.4 million bags. While internal UHF RFID tracks assets for carriers, passengers remain disconnected from their property's custody. Sevenoir bridges this gap with hybrid hardware and an API-first audit trail.
+               In 2024, the aviation industry mishandled 33.4 million bags. Sevenoir bridges the information gap between carrier tracking and passenger visibility through hybrid hardware and API-first audit trails.
              </p>
 
-             <div className="space-y-4">
+             <div className="space-y-5">
                 {[
                   "33.4M bags mishandled annually (SITA Data)",
                   "$150+ Average operational cost per incident",
@@ -103,11 +104,10 @@ export default function Home() {
                   "Lack of cross-industry identity interoperability"
                 ].map((item, i) => (
                   <div key={i} className="flex items-center group">
-                    <AlertCircle className="text-red-500/60 mr-4 shrink-0" size={20} />
-                    <div className="relative">
-                      <span className="text-white/90 font-light text-lg">{item}</span>
-                      <div className="absolute -bottom-1 left-0 w-0 h-px bg-red-500/30 transition-all group-hover:w-full"></div>
+                    <div className="flex items-center justify-center mr-4">
+                      <AlertCircle className="text-red-500 transition-transform group-hover:scale-110" size={20} />
                     </div>
+                    <span className="text-gray-200 font-light text-lg">{item}</span>
                   </div>
                 ))}
              </div>
@@ -141,7 +141,7 @@ export default function Home() {
 
            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Card 1: Hybrid Tag */}
-              <div className="flex flex-col h-full bg-white/[0.03] border border-white/10 rounded-2xl group hover:border-white/20 transition-all overflow-hidden">
+              <div className="flex flex-col h-full bg-white/[0.04] border border-white/10 rounded-2xl group hover:border-white/20 transition-all overflow-hidden">
                  <div className="p-8 pb-0">
                     <Cpu className="text-white/80 mb-4" size={32} />
                     <h3 className="text-xl font-bold text-white mb-2">1. Hybrid Identity Tag</h3>
@@ -165,7 +165,7 @@ export default function Home() {
               </div>
 
               {/* Card 2: Verification Engine */}
-              <div className="flex flex-col h-full bg-white/[0.03] border border-white/10 rounded-2xl group hover:border-white/20 transition-all overflow-hidden">
+              <div className="flex flex-col h-full bg-white/[0.04] border border-white/10 rounded-2xl group hover:border-white/20 transition-all overflow-hidden">
                  <div className="p-8 pb-4">
                     <Database className="text-white/80 mb-4" size={32} />
                     <h3 className="text-xl font-bold text-white mb-2">2. Verification Engine</h3>
@@ -189,7 +189,7 @@ export default function Home() {
               </div>
 
               {/* Card 3: Automated Recovery */}
-              <div className="flex flex-col h-full bg-white/[0.03] border border-white/10 rounded-2xl group hover:border-white/20 transition-all overflow-hidden">
+              <div className="flex flex-col h-full bg-white/[0.04] border border-white/10 rounded-2xl group hover:border-white/20 transition-all overflow-hidden">
                  <div className="p-8 pb-4">
                     <Globe className="text-white/80 mb-4" size={32} />
                     <h3 className="text-xl font-bold text-white mb-2">3. Recovery Operations</h3>
@@ -215,46 +215,26 @@ export default function Home() {
         </div>
       </section>
 
-      {/* STRATEGIC PARTNERSHIP SECTION (CONTRAST FIXED) */}
-      <section className="py-24 border-t border-white/10 bg-white/[0.01]">
+      {/* STRATEGIC PARTNERSHIP SECTION (FIXED VISIBILITY) */}
+      <section className="py-24 border-t border-white/10 bg-white/[0.02]">
         <div className="max-w-7xl mx-auto px-6 flex flex-col items-center">
             <h2 className="text-xs font-bold text-gray-400 uppercase tracking-[0.3em] mb-12">Technical Foundation</h2>
-            <div className="flex flex-wrap justify-center items-center gap-12 transition-all">
+            <div className="flex flex-wrap justify-center items-center gap-12">
                <div className="text-center group">
-                 <p className="text-white font-bold text-xl group-hover:text-gray-200 transition-colors">SAFAROFF Agency</p>
+                 <p className="text-white font-bold text-xl group-hover:text-blue-400 transition-colors">SAFAROFF Agency</p>
                  <p className="text-[10px] text-gray-300 uppercase tracking-widest mt-1">Digital Integration since 2004</p>
                </div>
                <div className="h-8 w-px bg-white/20 hidden md:block"></div>
                <div className="text-center group">
-                 <p className="text-white font-bold text-xl group-hover:text-gray-200 transition-colors">Stuart Prestedge</p>
+                 <p className="text-white font-bold text-xl group-hover:text-blue-400 transition-colors">Stuart Prestedge</p>
                  <p className="text-[10px] text-gray-300 uppercase tracking-widest mt-1">Strategic Advisor</p>
                </div>
                <div className="h-8 w-px bg-white/20 hidden md:block"></div>
                <div className="text-center group">
-                 <p className="text-white font-bold text-xl group-hover:text-gray-200 transition-colors">Munich Business School</p>
+                 <p className="text-white font-bold text-xl group-hover:text-blue-400 transition-colors">Munich Business School</p>
                  <p className="text-[10px] text-gray-300 uppercase tracking-widest mt-1">Academic Hub</p>
                </div>
             </div>
-        </div>
-      </section>
-
-      {/* OPERATIONAL LOGIC */}
-      <section className="py-24 border-t border-white/10 bg-white/[0.02]">
-        <div className="max-w-7xl mx-auto px-6">
-           <h2 className="text-3xl font-bold text-white mb-12 text-center uppercase tracking-widest">Operational Logic</h2>
-           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {[
-                { step: "01", label: "IATA Registration" },
-                { step: "02", label: "Checkpoint Handoff" },
-                { step: "03", label: "SITA Synchronization" },
-                { step: "04", label: "Verified Recovery" }
-              ].map((item, idx) => (
-                <div key={idx} className="bg-white/5 border border-white/10 p-8 flex flex-col items-center text-center rounded-xl hover:border-white/30 transition-all">
-                   <span className="text-5xl font-mono text-white/10 mb-4">{item.step}</span>
-                   <span className="text-lg font-semibold text-white">{item.label}</span>
-                </div>
-              ))}
-           </div>
         </div>
       </section>
 
