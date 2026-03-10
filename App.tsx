@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import { PageTransition } from './components/PageTransition';
 
 // Explicit page imports
 import Home from './pages/Home';
@@ -26,25 +27,19 @@ function AnimatedRoutes() {
   const location = useLocation();
 
   return (
-    <AnimatePresence mode="wait" initial={false}>
-      <motion.div
-        key={location.key}
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -12 }}
-        transition={{ duration: 0.3, ease: 'easeInOut' }}
-      >
+    <AnimatePresence mode="wait">
+      <div key={location.pathname}>
         <Routes location={location}>
-          <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/vision" element={<Vision />} />
-          <Route path="/future" element={<Future />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/investors" element={<Investors />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<Home />} />
+          <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+          <Route path="/products" element={<PageTransition><Products /></PageTransition>} />
+          <Route path="/vision" element={<PageTransition><Vision /></PageTransition>} />
+          <Route path="/future" element={<PageTransition><Future /></PageTransition>} />
+          <Route path="/about" element={<PageTransition><About /></PageTransition>} />
+          <Route path="/investors" element={<PageTransition><Investors /></PageTransition>} />
+          <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
+          <Route path="*" element={<PageTransition><Home /></PageTransition>} />
         </Routes>
-      </motion.div>
+      </div>
     </AnimatePresence>
   );
 }

@@ -1,137 +1,127 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { type Founder } from '../types';
-import { Linkedin, Github } from 'lucide-react';
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.1, duration: 0.5, ease: 'easeOut' },
-  }),
-};
-
-const founders: Founder[] = [
-  {
-    name: 'Alex Mercer',
-    role: 'CEO & Co-Founder',
-    bio: [
-      'Former Director of Digital Operations at a major European airline group.',
-      '15+ years building identity and tracking systems for high-stakes industries.',
-    ],
-    imagePlaceholderText: 'AM',
-    socials: { linkedin: '#', github: '#' },
-    email: 'alex@sevenoir.com',
-  },
-  {
-    name: 'Elena Dorfsky',
-    role: 'CTO & Co-Founder',
-    bio: [
-      'Led engineering teams at enterprise blockchain and IoT companies.',
-      'Expert in cryptographic identity systems and distributed ledger infrastructure.',
-    ],
-    imagePlaceholderText: 'ED',
-    socials: { linkedin: '#' },
-    email: 'elena@sevenoir.com',
-  },
-  {
-    name: 'Marcus Chen',
-    role: 'COO & Co-Founder',
-    bio: [
-      'Previously scaled operations at a global logistics unicorn to 40+ countries.',
-      'Deep expertise in supply-chain compliance and airport ground operations.',
-    ],
-    imagePlaceholderText: 'MC',
-    socials: { linkedin: '#' },
-    email: 'marcus@sevenoir.com',
-  },
-];
+import { Link } from 'react-router-dom';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { About as FoundersSection } from '../components/About';
 
 export default function About() {
+  // Exact button styles from Home.tsx
+  const primaryBtnClass = "w-full sm:w-auto px-5 py-3.5 md:px-8 md:py-4 bg-white text-black text-sm md:text-lg font-semibold tracking-wide hover:bg-gray-200 transition-colors flex items-center justify-center min-w-[160px] md:min-w-[200px] rounded-xl md:rounded-2xl shadow-[0_0_20px_rgba(255,255,255,0.1)] whitespace-normal text-center";
+
+  const features = [
+    {
+      title: "Durable Smart Tags",
+      desc: "NFC/QR identity layer designed for real-world conditions."
+    },
+    {
+      title: "Verified Checkpoints",
+      desc: "Trusted handoffs, status synchronization, and auditable events."
+    },
+    {
+      title: "Automated Recovery",
+      desc: "Owner contact and recovery workflows built for scale."
+    }
+  ];
+
   return (
-    <section className="min-h-screen max-w-7xl mx-auto px-6 py-24">
-      <motion.p
-        variants={fadeUp}
-        initial="hidden"
-        animate="visible"
-        custom={0}
-        className="text-xs font-semibold tracking-[0.3em] uppercase text-white/40 mb-3"
-      >
-        The Team
-      </motion.p>
-      <motion.h1
-        variants={fadeUp}
-        initial="hidden"
-        animate="visible"
-        custom={1}
-        className="text-4xl md:text-5xl font-bold text-metallic mb-6"
-      >
-        Built by Operators,
-        <br />
-        for Operators
-      </motion.h1>
-      <motion.p
-        variants={fadeUp}
-        initial="hidden"
-        animate="visible"
-        custom={2}
-        className="max-w-2xl text-white/60 leading-relaxed mb-16"
-      >
-        The Sevenoir founding team brings together deep domain expertise in aviation, logistics,
-        blockchain, and enterprise software. We've lived the problem we're solving.
-      </motion.p>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {founders.map((founder, i) => (
-          <motion.div
-            key={founder.name}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={3 + i}
-            className="silver-border rounded-2xl p-8 bg-white/5 flex flex-col"
+    <div className="min-h-screen">
+       {/* Hero */}
+       <section className="pt-32 pb-20 md:pt-40 md:pb-24 max-w-7xl mx-auto px-6">
+          <motion.div 
+             initial={{ opacity: 0, y: 20 }}
+             animate={{ opacity: 1, y: 0 }}
+             transition={{ duration: 0.6 }}
+             className="max-w-4xl"
           >
-            {/* Avatar placeholder */}
-            <div className="w-16 h-16 rounded-full bg-white/15 flex items-center justify-center text-xl font-bold text-white mb-5">
-              {founder.imagePlaceholderText}
-            </div>
+             <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 tracking-tight leading-[1.05]">
+                About SEVENOIR
+             </h1>
+             
+             {/* Pills */}
+             <div className="flex flex-wrap gap-3 mb-8">
+                {["Smart Identity Tag", "Recovery Network", "Enterprise-ready"].map((tag, i) => (
+                  <span key={i} className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs md:text-sm text-gray-200 font-medium tracking-wide">
+                    {tag}
+                  </span>
+                ))}
+             </div>
 
-            <h3 className="text-white font-bold text-xl">{founder.name}</h3>
-            <p className="text-white/50 text-sm mb-4">{founder.role}</p>
-
-            <ul className="space-y-2 flex-grow">
-              {founder.bio.map((line, j) => (
-                <li key={j} className="text-white/60 text-sm leading-relaxed">
-                  {line}
-                </li>
-              ))}
-            </ul>
-
-            {/* Socials */}
-            <div className="flex items-center gap-3 mt-6">
-              {founder.socials?.linkedin && (
-                <a
-                  href={founder.socials.linkedin}
-                  className="text-white/40 hover:text-white transition-colors"
-                  aria-label="LinkedIn"
-                >
-                  <Linkedin size={18} />
-                </a>
-              )}
-              {founder.socials?.github && (
-                <a
-                  href={founder.socials.github}
-                  className="text-white/40 hover:text-white transition-colors"
-                  aria-label="GitHub"
-                >
-                  <Github size={18} />
-                </a>
-              )}
-            </div>
+             <p className="text-xl md:text-2xl text-white mb-12 leading-relaxed font-light max-w-3xl">
+               We build smart identity tags and a recovery network that reconnects owners with lost items — fast, secure, and enterprise-ready.
+             </p>
           </motion.div>
-        ))}
-      </div>
-    </section>
+       </section>
+
+       {/* Mission */}
+       <section className="py-24 border-t border-white/10 bg-white/[0.02]">
+         <div className="max-w-7xl mx-auto px-6">
+            <motion.div
+               initial={{ opacity: 0 }}
+               whileInView={{ opacity: 1 }}
+               viewport={{ once: true }}
+               transition={{ duration: 0.8 }}
+            >
+                <span className="text-sm font-mono text-white uppercase tracking-widest border border-white/20 px-3 py-1 rounded-full mb-8 inline-block">Mission</span>
+                <h2 className="text-3xl md:text-5xl font-light text-white leading-tight max-w-5xl">
+                  Make identity and recovery <span className="text-gray-100">effortless for people</span> and <span className="text-gray-100">scalable for enterprises</span> — with durable tags, verifiable checkpoints, and automated recovery flows.
+                </h2>
+            </motion.div>
+         </div>
+       </section>
+
+       {/* What we build */}
+       <section className="py-24 border-t border-white/10 bg-[#686a6c]">
+          <div className="max-w-7xl mx-auto px-6">
+             <div className="mb-12">
+               <h2 className="text-3xl font-bold text-white mb-4">What we build</h2>
+               <p className="text-white">Core infrastructure components.</p>
+             </div>
+             
+             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {features.map((item, idx) => (
+                  <motion.div 
+                    key={idx}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.1, duration: 0.5 }}
+                    className="bg-[#575b5f] border border-white/10 rounded-2xl p-8 hover:border-white/20 transition-colors flex flex-col h-full"
+                  >
+                    <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6">
+                      <CheckCircle2 className="w-5 h-5 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
+                    <p className="text-white leading-relaxed text-sm">
+                      {item.desc}
+                    </p>
+                  </motion.div>
+                ))}
+             </div>
+          </div>
+       </section>
+
+       {/* Founders / Team Section */}
+       <FoundersSection />
+
+       {/* Bottom CTA */}
+       <section className="py-24 border-t border-white/10 bg-white/[0.02]">
+          <div className="max-w-7xl mx-auto px-6 text-center">
+             <motion.div
+               initial={{ opacity: 0, scale: 0.95 }}
+               whileInView={{ opacity: 1, scale: 1 }}
+               viewport={{ once: true }}
+             >
+               <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">Let’s talk enterprise integration.</h2>
+               <div className="flex justify-center">
+                  <Link to="/contact" className="w-full sm:w-auto">
+                     <button className={primaryBtnClass}>
+                        Contact us
+                     </button>
+                  </Link>
+               </div>
+             </motion.div>
+          </div>
+       </section>
+    </div>
   );
 }
