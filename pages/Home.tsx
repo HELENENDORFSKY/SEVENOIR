@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, BarChart3, ShieldCheck, Users, Globe, Database, Cpu, AlertCircle } from 'lucide-react';
+import { ArrowRight, BarChart3, Users, Globe, Database, Cpu, AlertCircle } from 'lucide-react';
 import { PlaceholderFrame } from '../components/ui/PlaceholderFrame';
 import { UseCases } from '../components/UseCases';
 import { MEDIA } from '../content/media';
@@ -54,7 +54,7 @@ export default function Home() {
 
               <p className="text-xl md:text-2xl text-white mb-12 max-w-3xl leading-relaxed font-light">
                 {viewMode === 'enterprise' ? (
-                  "Closing the $5.9B gap in mishandled logistics. Hybrid UHF/NFC identity tags integrated directly with SITA WorldTracer and IATA 753 standards."
+                  "Bridging the $5.9B intelligence gap in aviation logistics. Hybrid UHF/NFC infrastructure fully compliant with IATA Resolution 753 and SITA WorldTracer standards."
                 ) : (
                   "Your property, verified globally. Automated recovery that connects with airlines to find and return your luggage before you even realize it's missing."
                 )}
@@ -99,8 +99,8 @@ export default function Home() {
                 {[
                   "33.4M bags mishandled annually (SITA Data)",
                   "$150+ Average operational cost per incident",
-                  "Critical IATA 753 compliance gaps in networks",
-                  "Lack of cross-industry identity interoperability"
+                  "IATA Resolution 753 compliance gaps in interline networks",
+                  "Fragmented data silos and lack of cross-industry interoperability"
                 ].map((item, i) => (
                   <div key={i} className="flex items-center group">
                     <AlertCircle className="text-red-500/80 mr-4 shrink-0" size={20} />
@@ -147,6 +147,9 @@ export default function Home() {
                        <li>• Battery-free permanent identity</li>
                        <li>• Industrial-grade durability</li>
                     </ul>
+                    <p className="text-xs text-gray-300 mt-4 font-light italic leading-relaxed">
+                      The hardware foundation for a permanent, cryptographic link between physical assets and their digital twins.
+                    </p>
                  </div>
                  <div className="mt-auto px-4 pb-0">
                     <PlaceholderFrame 
@@ -171,6 +174,9 @@ export default function Home() {
                        <li>• Cryptographic custody proofs</li>
                        <li>• Anomaly detection & triage</li>
                     </ul>
+                    <p className="text-xs text-gray-300 mt-4 font-light italic leading-relaxed">
+                      A secure audit trail that translates industrial RFID data into actionable passenger insights.
+                    </p>
                  </div>
                  <div className="mt-4 px-4 pb-4">
                     <PlaceholderFrame 
@@ -195,6 +201,9 @@ export default function Home() {
                        <li>• Global carrier handoff protocol</li>
                        <li>• ROI-driven operational scaling</li>
                     </ul>
+                    <p className="text-xs text-gray-300 mt-4 font-light italic leading-relaxed">
+                      Reducing OPEX for carriers and friction for passengers through automated claim processing.
+                    </p>
                  </div>
                  <div className="mt-4 px-4 pb-4">
                     <PlaceholderFrame 
@@ -239,14 +248,15 @@ export default function Home() {
            <h2 className="text-3xl font-bold text-white mb-12 text-center uppercase tracking-widest">Operational Logic</h2>
            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {[
-                { step: "01", label: "IATA Registration" },
-                { step: "02", label: "Checkpoint Handoff" },
-                { step: "03", label: "SITA Synchronization" },
-                { step: "04", label: "Verified Recovery" }
+                { step: "01", label: "IATA Registration", desc: "Issuing a unique digital passport via the hybrid tag." },
+                { step: "02", label: "Checkpoint Handoff", desc: "Real-time custody updates at every ground handling stage." },
+                { step: "03", label: "SITA Synchronization", desc: "Automated matching with global tracing databases." },
+                { step: "04", label: "Verified Recovery", desc: "Secure proof-of-ownership for expedited asset return." }
               ].map((item, idx) => (
                 <div key={idx} className="bg-white/5 border border-white/10 p-8 flex flex-col items-center text-center rounded-xl hover:border-white/30 transition-all">
                    <span className="text-5xl font-mono text-white/10 mb-4">{item.step}</span>
-                   <span className="text-lg font-semibold text-white">{item.label}</span>
+                   <span className="text-lg font-semibold text-white mb-2">{item.label}</span>
+                   <p className="text-[10px] text-gray-400 font-light leading-relaxed">{item.desc}</p>
                 </div>
               ))}
            </div>
